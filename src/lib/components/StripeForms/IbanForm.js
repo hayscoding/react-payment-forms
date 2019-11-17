@@ -9,6 +9,7 @@ import createOptions from './utils/createOptions.js'
 class _IbanForm extends React.Component {
   handleSubmit = (ev) => {
     ev.preventDefault();
+
     if (this.props.stripe) {
       this.props.stripe
         .createSource({
@@ -27,6 +28,7 @@ class _IbanForm extends React.Component {
       console.log("Stripe.js hasn't loaded yet.");
     }
   };
+  
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
