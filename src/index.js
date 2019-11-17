@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import styles from './styles.css'
+// import StripeForm from './lib/components/StripeForm/StripeForm.js' 
+
+export { default as StripeForm } from './lib/components/StripeForm/StripeForm.js' 
 
 export default class ExampleComponent extends Component {
   static propTypes = {

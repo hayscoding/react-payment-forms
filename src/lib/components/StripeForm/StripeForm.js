@@ -1,178 +1,399 @@
-import React from "react";
-import {
-  CardElement,
-  StripeProvider,
-  Elements,
-  injectStripe,
-} from 'react-stripe-elements';
+import React, { Component } from 'react'
 
-const handleBlur = () => {
-  console.log('[blur]');
-};
-const handleChange = (change) => {
-  console.log('[change]', change);
-};
-const handleClick = () => {
-  console.log('[click]');
-};
-const handleFocus = () => {
-  console.log('[focus]');
-};
-const handleReady = () => {
-  console.log('[ready]');
-};
-
-const createOptions = (fontSize, padding) => {
-  return {
-    style: {
-      base: {
-        fontSize,
-        color: '#424770',
-        letterSpacing: '0.025em',
-        fontFamily: 'Source Code Pro, monospace',
-        '::placeholder': {
-          color: '#aab7c4',
-        },
-        padding,
-      },
-      invalid: {
-        color: '#9e2146',
-      },
-    },
-  };
-};
-
-class _CardForm extends React.Component {
-  handleSubmit = (ev) => {
-    ev.preventDefault()
-
-    if (this.props.stripe) {
-      this.props.stripe.createToken()
-        .then((payload) => {
-          console.log('Recieved stripe token: ', payload)
-
-          if(this.wasSuccessful(payload)){
-            this.props.cb(true);
-            this.sendToken(payload.token)
-          }
-        });
-    } else {
-      console.log("Stripe.js hasn't loaded yet.");
-    }
-  }
-
-  getUserEmail() {
-      const netlifyIdentity = window.netlifyIdentity
-
-      if(netlifyIdentity)
-        return(netlifyIdentity.currentUser().email)
-      else
-          console.log('called checkCurrentUser() before netlifyIdentity has been set.')
-  }
-
-  sendToken(token) {
-    console.log('sending /charge post req with token...')
-    
-    // const url = "https://haysstanfordpay-test.herokuapp.com/chargeExt" //test url
-    const url = "https://haysstanfordpay.herokuapp.com/chargeExt"  //live url
-    // const url = "http://localhost:3000/chargeExt"  //local url
-
-    const userId = this.getUserEmail()
-    const data = token.email+','+token.id+','+userId
-
-    var xhr = new XMLHttpRequest();
-
-    xhr.open("POST", url, true);
-
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-    xhr.send(data);
-  }
-
-  wasSuccessful(payload) {
-    if(payload.token != undefined)
-      return true
-    else
-      return false
-  }
+export default class StripeForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h4 style={{marginBottom: 0, textShadow: 'none', paddingBottom: '20px'}}>Join the Course!</h4>
-        <label style={{textShadow: 'none'}}>
-          <CardElement
-            onBlur={handleBlur}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onReady={handleReady}
-            {...createOptions(this.props.fontSize)}
-          />
-        </label><br />
-        <button 
-            id={"buyButton"}
-            style={{fontWeight: 'bold', fontSize: '20px', background: '#c10000'}}>
-          Enroll Now $14.00
-        </button>
-      </form>
+      <div className={'#'}>
+        Example Componentdssdfsfdsfd:
+      </div>
     )
   }
 }
 
-const CardForm = injectStripe(_CardForm);
 
-class Checkout extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      elementFontSize: window.innerWidth < 450 ? '14px' : '18px',
-    };
-    window.addEventListener('resize', () => {
-      if (window.innerWidth < 450 && this.state.elementFontSize !== '14px') {
-        this.setState({elementFontSize: '14px'});
-      } else if (
-        window.innerWidth >= 450 &&
-        this.state.elementFontSize !== '18px'
-      ) {
-        this.setState({elementFontSize: '18px'});
-      }
-    });
-  }
+//////////
+// import React, { Component } from 'react'
 
-  render() {
-    const {elementFontSize} = this.state;
-    return (
-      <div className="Checkout">
-        <Elements>
-          <CardForm fontSize={elementFontSize} cb={this.props.cb} />
-        </Elements>
-      </div>
-    );
-  }
-}
+// import {
+//   CardElement,
+//   CardNumberElement,
+//   CardExpiryElement,
+//   CardCVCElement,
+//   PaymentRequestButtonElement,
+//   IbanElement,
+//   IdealBankElement,
+//   StripeProvider,
+//   Elements,
+//   injectStripe,
+//   InjectedCheckoutForm
+// } from 'react-stripe-elements';
 
-class StripeForm extends React.Component {
-  render() {
-    const testKey = "pk_test_U3AMAHsJAc6EUy5oXOll9vrr"
-    const liveKey = ""
+// export default class StripeForm extends Component {
+//   constructor() {
+//       super();
+//       this.state = { stripeLoaded: false };
+//   }
 
-    return (
-      <div style={{
-        background: 'white', 
-        borderRadius: 50, 
-        marginTop: 100, 
-        padding: 30,
-        width: 600,
-        margin: 'auto auto',
-        marginTop: '21px',
-        marginBottom: '20px',
-      }}>
-        <StripeProvider apiKey={testKey}>
-          <Checkout cb={this.props.cb} />
-        </StripeProvider>
-      </div>
-    );
-  }
-};
+//   componentDidMount() {
+//     this.addScript();
+//     this.setStripe();
+//   }
 
-export default StripeForm;
+//   setStripe() {
+//     if (window.Stripe) {
+//       this.setState({stripeLoaded: true});
+//       // this.setState({stripe: window.Stripe('pk_test_U3AMAHsJAc6EUy5oXOll9vrr')});
+//     } else {
+//       document.querySelector('#stripe-js').addEventListener('load', () => {
+//         this.setState({stripeLoaded: true});
+//       });
+//     }
+//   }
+
+//   addScript() {
+//     const script = document.createElement("script");
+//     script.setAttribute("id", "stripe-js")
+
+//       script.src = "https://js.stripe.com/v3/";
+//       script.async = true;
+
+//       document.body.appendChild(script);
+//   }
+
+//   showStripeForm() {
+//     console.log('STRIPE: ', window.Stripe)
+
+//     if(this.state.stripeLoaded)
+//       return(
+//         <StripeProvider apiKey="pk_test_6pRNASCoBOKtIshFeQd4XMUh">
+//             <Checkout />
+//           </StripeProvider>
+//       )
+//   }
+
+//     render() {
+//     // <script id="stripe-js" src="https://js.stripe.com/v3/" async></script>
+
+//     return (
+//       <div>
+//         {
+//           this.showStripeForm()
+//         }
+//       </div>
+//     )
+//   }
+// }
+
+// const handleBlur = () => {
+//   console.log('[blur]');
+// };
+// const handleChange = (change) => {
+//   console.log('[change]', change);
+// };
+// const handleClick = () => {
+//   console.log('[click]');
+// };
+// const handleFocus = () => {
+//   console.log('[focus]');
+// };
+// const handleReady = () => {
+//   console.log('[ready]');
+// };
+
+// const createOptions = (fontSize, padding) => {
+//   return {
+//     style: {
+//       base: {
+//         fontSize,
+//         color: '#424770',
+//         letterSpacing: '0.025em',
+//         fontFamily: 'Source Code Pro, monospace',
+//         '::placeholder': {
+//           color: '#aab7c4',
+//         },
+//         padding,
+//       },
+//       invalid: {
+//         color: '#9e2146',
+//       },
+//     },
+//   };
+// };
+
+// class _CardForm extends React.Component {
+//   handleSubmit = (ev) => {
+//     ev.preventDefault();
+//     if (this.props.stripe) {
+//       this.props.stripe
+//         .createToken()
+//         .then((payload) => console.log('[token]', payload));
+//     } else {
+//       console.log("Stripe.js hasn't loaded yet.");
+//     }
+//   };
+//   render() {
+//     return (
+//       <form onSubmit={this.handleSubmit}>
+//         <label>
+//           Card details
+//           <CardElement
+//             onBlur={handleBlur}
+//             onChange={handleChange}
+//             onFocus={handleFocus}
+//             onReady={handleReady}
+//             {...createOptions(this.props.fontSize)}
+//           />
+//         </label>
+//         <button>Pay</button>
+//       </form>
+//     );
+//   }
+// }
+// const CardForm = injectStripe(_CardForm);
+
+// class _SplitForm extends React.Component {
+//   handleSubmit = (ev) => {
+//     ev.preventDefault();
+//     if (this.props.stripe) {
+//       this.props.stripe
+//         .createToken()
+//         .then((payload) => console.log('[token]', payload));
+//     } else {
+//       console.log("Stripe.js hasn't loaded yet.");
+//     }
+//   };
+//   render() {
+//     return (
+//       <form onSubmit={this.handleSubmit}>
+//         <label>
+//           Card number
+//           <CardNumberElement
+//             onBlur={handleBlur}
+//             onChange={handleChange}
+//             onFocus={handleFocus}
+//             onReady={handleReady}
+//             {...createOptions(this.props.fontSize)}
+//           />
+//         </label>
+//         <label>
+//           Expiration date
+//           <CardExpiryElement
+//             onBlur={handleBlur}
+//             onChange={handleChange}
+//             onFocus={handleFocus}
+//             onReady={handleReady}
+//             {...createOptions(this.props.fontSize)}
+//           />
+//         </label>
+//         <label>
+//           CVC
+//           <CardCVCElement
+//             onBlur={handleBlur}
+//             onChange={handleChange}
+//             onFocus={handleFocus}
+//             onReady={handleReady}
+//             {...createOptions(this.props.fontSize)}
+//           />
+//         </label>
+//         <button>Pay</button>
+//       </form>
+//     );
+//   }
+// }
+// const SplitForm = injectStripe(_SplitForm);
+
+// class _PaymentRequestForm extends React.Component {
+//   constructor(props) {
+//     super(props);
+
+//     const paymentRequest = props.stripe.paymentRequest({
+//       country: 'US',
+//       currency: 'usd',
+//       total: {
+//         label: 'Demo total',
+//         amount: 1000,
+//       },
+//     });
+
+//     paymentRequest.on('token', ({complete, token, ...data}) => {
+//       console.log('Received Stripe token: ', token);
+//       console.log('Received customer information: ', data);
+//       complete('success');
+//     });
+
+//     paymentRequest.canMakePayment().then((result) => {
+//       this.setState({canMakePayment: !!result});
+//     });
+
+//     this.state = {
+//       canMakePayment: false,
+//       paymentRequest,
+//     };
+//   }
+
+//   render() {
+//     return this.state.canMakePayment ? (
+//       <PaymentRequestButtonElement
+//         className="PaymentRequestButton"
+//         onBlur={handleBlur}
+//         onClick={handleClick}
+//         onFocus={handleFocus}
+//         onReady={handleReady}
+//         paymentRequest={this.state.paymentRequest}
+//         style={{
+//           paymentRequestButton: {
+//             theme: 'dark',
+//             height: '64px',
+//             type: 'donate',
+//           },
+//         }}
+//       />
+//     ) : null;
+//   }
+// }
+// const PaymentRequestForm = injectStripe(_PaymentRequestForm);
+
+// class _IbanForm extends React.Component {
+//   handleSubmit = (ev) => {
+//     ev.preventDefault();
+//     if (this.props.stripe) {
+//       this.props.stripe
+//         .createSource({
+//           type: 'sepa_debit',
+//           currency: 'eur',
+//           owner: {
+//             name: ev.target.name.value,
+//             email: ev.target.email.value,
+//           },
+//           mandate: {
+//             notification_method: 'email',
+//           },
+//         })
+//         .then((payload) => console.log('[source]', payload));
+//     } else {
+//       console.log("Stripe.js hasn't loaded yet.");
+//     }
+//   };
+//   render() {
+//     return (
+//       <form onSubmit={this.handleSubmit}>
+//         <label>
+//           Name
+//           <input name="name" type="text" placeholder="Jane Doe" required />
+//         </label>
+//         <label>
+//           Email
+//           <input
+//             name="email"
+//             type="email"
+//             placeholder="jane.doe@example.com"
+//             required
+//           />
+//         </label>
+//         <label>
+//           IBAN
+//           <IbanElement
+//             supportedCountries={['SEPA']}
+//             onBlur={handleBlur}
+//             onChange={handleChange}
+//             onFocus={handleFocus}
+//             onReady={handleReady}
+//             {...createOptions(this.props.fontSize)}
+//           />
+//         </label>
+//         <button>Pay</button>
+//       </form>
+//     );
+//   }
+// }
+// const IbanForm = injectStripe(_IbanForm);
+
+// class _IdealBankForm extends React.Component {
+//   handleSubmit = (ev) => {
+//     ev.preventDefault();
+//     if (this.props.stripe) {
+//       this.props.stripe
+//         .createSource({
+//           type: 'ideal',
+//           amount: 1099,
+//           currency: 'eur',
+//           owner: {
+//             name: ev.target.name.value,
+//           },
+//           redirect: {
+//             return_url: 'https://example.com',
+//           },
+//         })
+//         .then((payload) => console.log('[source]', payload));
+//     } else {
+//       console.log("Stripe.js hasn't loaded yet.");
+//     }
+//   };
+//   render() {
+//     return (
+//       <form onSubmit={this.handleSubmit}>
+//         <label>
+//           Name
+//           <input name="name" type="text" placeholder="Jane Doe" required />
+//         </label>
+//         <label>
+//           iDEAL Bank
+//           <IdealBankElement
+//             className="IdealBankElement"
+//             onBlur={handleBlur}
+//             onChange={handleChange}
+//             onFocus={handleFocus}
+//             onReady={handleReady}
+//             {...createOptions(this.props.fontSize, '10px 14px')}
+//           />
+//         </label>
+//         <button>Pay</button>
+//       </form>
+//     );
+//   }
+// }
+// const IdealBankForm = injectStripe(_IdealBankForm);
+
+// class Checkout extends React.Component {
+//   constructor() {
+//     super();
+//     this.state = {
+//       elementFontSize: window.innerWidth < 450 ? '14px' : '18px',
+//     };
+//     window.addEventListener('resize', () => {
+//       if (window.innerWidth < 450 && this.state.elementFontSize !== '14px') {
+//         this.setState({elementFontSize: '14px'});
+//       } else if (
+//         window.innerWidth >= 450 &&
+//         this.state.elementFontSize !== '18px'
+//       ) {
+//         this.setState({elementFontSize: '18px'});
+//       }
+//     });
+//   }
+
+//   render() {
+//     const {elementFontSize} = this.state;
+//     return (
+//       <div className="Checkout">
+//         <h1>Available Elements</h1>
+//         <Elements>
+//           <CardForm fontSize={elementFontSize} />
+//         </Elements>
+//         <Elements>
+//           <SplitForm fontSize={elementFontSize} />
+//         </Elements>
+//         <Elements>
+//           <PaymentRequestForm />
+//         </Elements>
+//         <Elements>
+//           <IbanForm fontSize={elementFontSize} />
+//         </Elements>
+//         <Elements>
+//           <IdealBankForm fontSize={elementFontSize} />
+//         </Elements>
+//       </div>
+//     );
+//   }
+// }
