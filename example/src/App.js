@@ -19,7 +19,7 @@ import {
 export default class App extends Component {
 	constructor() {
 	    super();
-	    this.state = { stripe: null };
+	    this.state = { stripeLoaded: false };
 	}
 
 	componentDidMount() {
@@ -29,12 +29,11 @@ export default class App extends Component {
 
 	setStripe() {
 		if (window.Stripe) {
-			this.setState({stripe: window.Stripe('pk_test_12345')});
+			this.setState({stripeLoaded: true});
+			// this.setState({stripe: window.Stripe('pk_test_U3AMAHsJAc6EUy5oXOll9vrr')});
 		} else {
 			document.querySelector('#stripe-js').addEventListener('load', () => {
-				// Create Stripe instance once Stripe.js loads
-				this.setState({stripe: window.Stripe('pk_test_12345')});
-				console.log('STRIPE: ', window.Stripe)
+				this.setState({stripeLoaded: true});
 			});
 		}
 	}
@@ -49,13 +48,26 @@ export default class App extends Component {
 	    document.body.appendChild(script);
 	}
 
+	showStripeForm() {
+		console.log('STRIPE: ', window.Stripe)
+
+		if(this.state.stripeLoaded)
+			return(
+				<StripeProvider apiKey="pk_test_6pRNASCoBOKtIshFeQd4XMUh">
+			      <Checkout />
+			    </StripeProvider>
+			)
+	}
+
   	render() {
 		// <script id="stripe-js" src="https://js.stripe.com/v3/" async></script>
 
 		return (
 			<div>
 				<ExampleComponent text='Modern React component module' />
-				
+				{
+					this.showStripeForm()
+				}
 			</div>
 		)
 	}
