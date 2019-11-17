@@ -1,16 +1,6 @@
 import React, { Component } from 'react'
 import {
-  CardElement,
-  CardNumberElement,
-  CardExpiryElement,
-  CardCVCElement,
-  PaymentRequestButtonElement,
-  IbanElement,
-  IdealBankElement,
   StripeProvider,
-  Elements,
-  injectStripe,
-  InjectedCheckoutForm
 } from 'react-stripe-elements';
 import Checkout from './Checkout.js'
 
