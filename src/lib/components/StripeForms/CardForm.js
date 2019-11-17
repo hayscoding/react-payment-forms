@@ -26,10 +26,11 @@ class _CardForm extends React.Component {
       console.log("Stripe.js hasn't loaded yet.");
     }
   };
-  
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+      	<h1>Buy Now</h1>
         <label>
           Card details
           <CardElement

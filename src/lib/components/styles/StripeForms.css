@@ -97,3 +97,10 @@ input:focus,
 .StripeElement.PaymentRequestButton {
   padding: 0;
 }
+
+.StripeForm {
+  background: white;
+  padding: 40px 40px;
+  border: 2px solid lightgray;
+  border-radius: 50px;
+}

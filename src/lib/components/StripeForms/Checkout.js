@@ -30,7 +30,6 @@ export default class Checkout extends React.Component {
     const {elementFontSize} = this.state;
     return (
       <div className="Checkout">
-        <h1>Available Elements</h1>
         <Elements>
           <CardForm fontSize={elementFontSize} />
         </Elements>

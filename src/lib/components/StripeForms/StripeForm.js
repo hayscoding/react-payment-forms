@@ -53,7 +53,7 @@ export default class StripeForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.StripeForm}>
         {
           this.showStripeForm()
         }
