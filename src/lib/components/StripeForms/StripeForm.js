@@ -19,7 +19,6 @@ import handlers from './utils/handlers.js'
 
 import styles from '../styles/StripeForms.css'
 
-
 export default class StripeForm extends Component {
   constructor() {
     super();

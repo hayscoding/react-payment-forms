@@ -1,17 +1,5 @@
 import React, { Component } from 'react'
-import {
-  CardElement,
-  CardNumberElement,
-  CardExpiryElement,
-  CardCVCElement,
-  PaymentRequestButtonElement,
-  IbanElement,
-  IdealBankElement,
-  StripeProvider,
-  Elements,
-  injectStripe,
-  InjectedCheckoutForm
-} from 'react-stripe-elements';
+import { Elements } from 'react-stripe-elements';
 import CardForm from './CardForm.js'
 import SplitForm from './SplitForm.js'
 import IdealBankForm from './IdealBankForm.js'
