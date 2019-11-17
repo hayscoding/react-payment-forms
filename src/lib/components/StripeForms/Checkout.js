@@ -35,18 +35,6 @@ export default class Checkout extends React.Component {
         <Elements>
           <CardForm fontSize={elementFontSize} />
         </Elements>
-        <Elements>
-          <SplitForm fontSize={elementFontSize} />
-        </Elements>
-        <Elements>
-          <PaymentRequestForm />
-        </Elements>
-        <Elements>
-          <IbanForm fontSize={elementFontSize} />
-        </Elements>
-        <Elements>
-          <IdealBankForm fontSize={elementFontSize} />
-        </Elements> 
       </div>
     );
   }
