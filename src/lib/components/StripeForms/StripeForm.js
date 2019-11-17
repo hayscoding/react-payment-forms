@@ -12,10 +12,12 @@ import {
   injectStripe,
   InjectedCheckoutForm
 } from 'react-stripe-elements';
+import CardForm from './CardForm.js'
+
+import handlers from './utils/handlers.js'
 
 import styles from '../styles/StripeForms.css'
 
-import CardForm from './CardForm.js'
 
 export default class StripeForm extends Component {
   constructor() {
@@ -123,30 +125,30 @@ class _SplitForm extends React.Component {
         <label>
           Card number
           <CardNumberElement
-            onBlur={handleBlur}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onReady={handleReady}
+            onBlur={handlers.handleBlur}
+            onChange={handlers.handleChange}
+            onFocus={handlers.handleFocus}
+            onReady={handlers.handleReady}
             {...createOptions(this.props.fontSize)}
           />
         </label>
         <label>
           Expiration date
           <CardExpiryElement
-            onBlur={handleBlur}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onReady={handleReady}
+            onBlur={handlers.handleBlur}
+            onChange={handlers.handleChange}
+            onFocus={handlers.handleFocus}
+            onReady={handlers.handleReady}
             {...createOptions(this.props.fontSize)}
           />
         </label>
         <label>
           CVC
           <CardCVCElement
-            onBlur={handleBlur}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onReady={handleReady}
+            onBlur={handlers.handleBlur}
+            onChange={handlers.handleChange}
+            onFocus={handlers.handleFocus}
+            onReady={handlers.handleReady}
             {...createOptions(this.props.fontSize)}
           />
         </label>
@@ -190,10 +192,10 @@ class _PaymentRequestForm extends React.Component {
     return this.state.canMakePayment ? (
       <PaymentRequestButtonElement
         className="PaymentRequestButton"
-        onBlur={handleBlur}
-        onClick={handleClick}
-        onFocus={handleFocus}
-        onReady={handleReady}
+        onBlur={handlers.handleBlur}
+        onClick={handlers.handleClick}
+        onFocus={handlers.handleFocus}
+        onReady={handlers.handleReady}
         paymentRequest={this.state.paymentRequest}
         style={{
           paymentRequestButton: {
@@ -249,10 +251,10 @@ class _IbanForm extends React.Component {
           IBAN
           <IbanElement
             supportedCountries={['SEPA']}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onReady={handleReady}
+            onBlur={handlers.handleBlur}
+            onChange={handlers.handleChange}
+            onFocus={handlers.handleFocus}
+            onReady={handlers.handleReady}
             {...createOptions(this.props.fontSize)}
           />
         </label>
@@ -295,10 +297,10 @@ class _IdealBankForm extends React.Component {
           iDEAL Bank
           <IdealBankElement
             className="IdealBankElement"
-            onBlur={handleBlur}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onReady={handleReady}
+            onBlur={handlers.handleBlur}
+            onChange={handlers.handleChange}
+            onFocus={handlers.handleFocus}
+            onReady={handlers.handleReady}
             {...createOptions(this.props.fontSize, '10px 14px')}
           />
         </label>
@@ -335,13 +337,6 @@ class Checkout extends React.Component {
         <Elements>
           <CardForm fontSize={elementFontSize} />
         </Elements>
-
-      </div>
-    );
-  }
-}
-
-/*
         <Elements>
           <SplitForm fontSize={elementFontSize} />
         </Elements>
@@ -353,4 +348,12 @@ class Checkout extends React.Component {
         </Elements>
         <Elements>
           <IdealBankForm fontSize={elementFontSize} />
-        </Elements>
+        </Elements> 
+      </div>
+    );
+  }
+}
+
+/*
+        
+        */
