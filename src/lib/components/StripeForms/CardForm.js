@@ -13,26 +13,7 @@ import {
   InjectedCheckoutForm
 } from 'react-stripe-elements';
 import handlers from './utils/handlers.js'
-
-const createOptions = (fontSize, padding) => {
-  return {
-    style: {
-      base: {
-        fontSize,
-        color: '#424770',
-        letterSpacing: '0.025em',
-        fontFamily: 'Source Code Pro, monospace',
-        '::placeholder': {
-          color: '#aab7c4',
-        },
-        padding,
-      },
-      invalid: {
-        color: '#9e2146',
-      },
-    },
-  };
-};
+import createOptions from './utils/createOptions.js'
 
 class _CardForm extends React.Component {
   handleSubmit = (ev) => {
