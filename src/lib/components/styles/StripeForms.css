@@ -54,9 +54,7 @@ button {
 }
 
 form {
-  margin-bottom: 40px;
-  padding-bottom: 40px;
-  border-bottom: 3px solid #e6ebf1;
+  margin-bottom: 30px;
 }
 
 button:hover {
