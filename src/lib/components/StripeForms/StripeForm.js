@@ -14,6 +14,7 @@ import {
 } from 'react-stripe-elements';
 import CardForm from './CardForm.js'
 import SplitForm from './SplitForm.js'
+import createOptions from './utils/createOptions.js'
 
 import handlers from './utils/handlers.js'
 
@@ -72,26 +73,6 @@ export default class StripeForm extends Component {
     )
   }
 }
-
-const createOptions = (fontSize, padding) => {
-  return {
-    style: {
-      base: {
-        fontSize,
-        color: '#424770',
-        letterSpacing: '0.025em',
-        fontFamily: 'Source Code Pro, monospace',
-        '::placeholder': {
-          color: '#aab7c4',
-        },
-        padding,
-      },
-      invalid: {
-        color: '#9e2146',
-      },
-    },
-  };
-};
 
 // class _SplitForm extends React.Component {
 //   handleSubmit = (ev) => {
