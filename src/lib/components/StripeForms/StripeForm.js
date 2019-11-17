@@ -16,10 +16,10 @@ import CardForm from './CardForm.js'
 import SplitForm from './SplitForm.js'
 import IdealBankForm from './IdealBankForm.js'
 import IbanForm from './IbanForm.js'
+import PaymentRequestForm from './PaymentRequestForm.js'
 import createOptions from './utils/createOptions.js'
 
 import handlers from './utils/handlers.js'
-
 import styles from '../styles/StripeForms.css'
 
 
@@ -76,57 +76,6 @@ export default class StripeForm extends Component {
   }
 }
 
-class _PaymentRequestForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    const paymentRequest = props.stripe.paymentRequest({
-      country: 'US',
-      currency: 'usd',
-      total: {
-        label: 'Demo total',
-        amount: 1000,
-      },
-    });
-
-    paymentRequest.on('token', ({complete, token, ...data}) => {
-      console.log('Received Stripe token: ', token);
-      console.log('Received customer information: ', data);
-      complete('success');
-    });
-
-    paymentRequest.canMakePayment().then((result) => {
-      this.setState({canMakePayment: !!result});
-    });
-
-    this.state = {
-      canMakePayment: false,
-      paymentRequest,
-    };
-  }
-
-  render() {
-    return this.state.canMakePayment ? (
-      <PaymentRequestButtonElement
-        className="PaymentRequestButton"
-        onBlur={handlers.handleBlur}
-        onClick={handlers.handleClick}
-        onFocus={handlers.handleFocus}
-        onReady={handlers.handleReady}
-        paymentRequest={this.state.paymentRequest}
-        style={{
-          paymentRequestButton: {
-            theme: 'dark',
-            height: '64px',
-            type: 'donate',
-          },
-        }}
-      />
-    ) : null;
-  }
-}
-const PaymentRequestForm = injectStripe(_PaymentRequestForm);
-
 class Checkout extends React.Component {
   constructor() {
     super();
@@ -169,7 +118,3 @@ class Checkout extends React.Component {
     );
   }
 }
-
-/*
-        
-        */
