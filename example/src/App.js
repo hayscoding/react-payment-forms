@@ -24,7 +24,10 @@ export default class App extends Component {
 
 	componentDidMount() {
 		this.addScript();
-		
+		this.setStripe();
+	}
+
+	setStripe() {
 		if (window.Stripe) {
 			this.setState({stripe: window.Stripe('pk_test_12345')});
 		} else {
@@ -47,11 +50,12 @@ export default class App extends Component {
 	}
 
   	render() {
-				// <script id="stripe-js" src="https://js.stripe.com/v3/" async></script>
+		// <script id="stripe-js" src="https://js.stripe.com/v3/" async></script>
 
 		return (
 			<div>
 				<ExampleComponent text='Modern React component module' />
+				
 			</div>
 		)
 	}
