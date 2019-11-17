@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { Elements } from 'react-stripe-elements';
+
 import CardForm from './CardForm.js'
 import SplitForm from './SplitForm.js'
 import IdealBankForm from './IdealBankForm.js'
 import IbanForm from './IbanForm.js'
 import PaymentRequestForm from './PaymentRequestForm.js'
-import createOptions from './utils/createOptions.js'
 
-import handlers from './utils/handlers.js'
 import styles from '../styles/StripeForms.css'
 
 export default class Checkout extends React.Component {
