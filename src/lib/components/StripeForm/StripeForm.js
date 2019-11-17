@@ -17,8 +17,8 @@ import styles from './StripeForm.css'
 
 export default class StripeForm extends Component {
   constructor() {
-      super();
-      this.state = { stripeLoaded: false };
+    super();
+    this.state = { stripeLoaded: false };
   }
 
   componentDidMount() {
@@ -29,7 +29,6 @@ export default class StripeForm extends Component {
   setStripe() {
     if (window.Stripe) {
       this.setState({stripeLoaded: true});
-      // this.setState({stripe: window.Stripe('pk_test_U3AMAHsJAc6EUy5oXOll9vrr')});
     } else {
       document.querySelector('#stripe-js').addEventListener('load', () => {
         this.setState({stripeLoaded: true});
@@ -41,26 +40,24 @@ export default class StripeForm extends Component {
     const script = document.createElement("script");
     script.setAttribute("id", "stripe-js")
 
-      script.src = "https://js.stripe.com/v3/";
-      script.async = true;
+    script.src = "https://js.stripe.com/v3/";
+    script.async = true;
 
-      document.body.appendChild(script);
+    document.body.appendChild(script);
   }
 
   showStripeForm() {
-    console.log('STRIPE: ', window.Stripe)
+    // console.log('STRIPE: ', window.Stripe)
 
     if(this.state.stripeLoaded)
       return(
         <StripeProvider apiKey="pk_test_6pRNASCoBOKtIshFeQd4XMUh">
             <Checkout />
-          </StripeProvider>
+        </StripeProvider>
       )
   }
 
-    render() {
-    // <script id="stripe-js" src="https://js.stripe.com/v3/" async></script>
-
+  render() {
     return (
       <div>
         {
