@@ -366,6 +366,13 @@ class Checkout extends React.Component {
         <Elements>
           <CardForm fontSize={elementFontSize} />
         </Elements>
+
+      </div>
+    );
+  }
+}
+
+/*
         <Elements>
           <SplitForm fontSize={elementFontSize} />
         </Elements>
@@ -378,7 +385,4 @@ class Checkout extends React.Component {
         <Elements>
           <IdealBankForm fontSize={elementFontSize} />
         </Elements>
-      </div>
-    );
-  }
-}
+        */

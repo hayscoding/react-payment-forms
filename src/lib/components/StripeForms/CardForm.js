@@ -12,22 +12,7 @@ import {
   injectStripe,
   InjectedCheckoutForm
 } from 'react-stripe-elements';
-
-const handleBlur = () => {
-  console.log('[blur]');
-};
-const handleChange = (change) => {
-  console.log('[change]', change);
-};
-const handleClick = () => {
-  console.log('[click]');
-};
-const handleFocus = () => {
-  console.log('[focus]');
-};
-const handleReady = () => {
-  console.log('[ready]');
-};
+import handlers from './utils/handlers.js'
 
 const createOptions = (fontSize, padding) => {
   return {
@@ -66,10 +51,10 @@ class _CardForm extends React.Component {
         <label>
           Card details
           <CardElement
-            onBlur={handleBlur}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onReady={handleReady}
+            onBlur={handlers.handleBlur}
+            onChange={handlers.handleChange}
+            onFocus={handlers.handleFocus}
+            onReady={handlers.handleReady}
             {...createOptions(this.props.fontSize)}
           />
         </label>
