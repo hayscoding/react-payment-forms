@@ -1,16 +1,7 @@
 import React, { Component } from 'react'
 import {
-  CardElement,
-  CardNumberElement,
-  CardExpiryElement,
-  CardCVCElement,
-  PaymentRequestButtonElement,
-  IbanElement,
   IdealBankElement,
-  StripeProvider,
-  Elements,
   injectStripe,
-  InjectedCheckoutForm
 } from 'react-stripe-elements';
 import handlers from './utils/handlers.js'
 import createOptions from './utils/createOptions.js'
@@ -18,6 +9,7 @@ import createOptions from './utils/createOptions.js'
 class _IdealBankForm extends React.Component {
   handleSubmit = (ev) => {
     ev.preventDefault();
+    
     if (this.props.stripe) {
       this.props.stripe
         .createSource({
@@ -36,6 +28,7 @@ class _IdealBankForm extends React.Component {
       console.log("Stripe.js hasn't loaded yet.");
     }
   };
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -59,6 +52,7 @@ class _IdealBankForm extends React.Component {
     );
   }
 }
+
 const IdealBankForm = injectStripe(_IdealBankForm);
 
 export default IdealBankForm;
