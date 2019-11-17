@@ -13,7 +13,7 @@ import {
   InjectedCheckoutForm
 } from 'react-stripe-elements';
 
-import styles from './StripeForm.css'
+import styles from '../styles/StripeForms.css'
 
 export default class StripeForm extends Component {
   constructor() {
