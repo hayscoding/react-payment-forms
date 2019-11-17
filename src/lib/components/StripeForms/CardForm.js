@@ -12,16 +12,26 @@ import {
   injectStripe,
   InjectedCheckoutForm
 } from 'react-stripe-elements';
+
 import handlers from './utils/handlers.js'
 import createOptions from './utils/createOptions.js'
+import stripePayload from './utils/stripePayload.js'
 
 class _CardForm extends React.Component {
   handleSubmit = (ev) => {
     ev.preventDefault();
+
     if (this.props.stripe) {
       this.props.stripe
         .createToken()
-        .then((payload) => console.log('[token]', payload));
+        .then((payload) => {
+        	console.log('[token]', payload)
+
+        	if(stripePayload.wasSuccessful(payload)) {
+        		console.log('SENDING STRIPE TOKEN...')
+        		stripePayload.sendTokenHTTP(payload.token)
+        	}
+        });
     } else {
       console.log("Stripe.js hasn't loaded yet.");
     }
